@@ -1,0 +1,26 @@
+## Progress
+
+.From 01/30 - 02/03 we accomplished the following
+
+* Installed two servers with openSUSE minimal
+** Updated to kernel-default and added utilities such as podman, etcdctl, nmap
+* Configured Keepalived under podman, using a macvlan overlay on the backend network
+* Installed and configured DRBD, also on the macvlan network
+* Ran etcd on both nodes, in podman, with unique IP addresses on the macvlan network
+* Ran a single transient etcd instance, in podman, with a simliar network configuration and its data directory on the DRBD device 
+** Unique ports are required on the transient instance
+* Switched the transient instance from one node to the other:
+** Stopped the container
+** Unmounted the filesystem
+** Mounted the filesystem on the other node
+** Ran the container on the other node
+* The etcd cluster remains responsive throughout the exercise
+
+.Issues uncovered / tasks left outstanding
+
+* A full load balancer is needed since Keepalived is providing an extra IP address on the node, not on the containers
+* DRBD doesn't maintain the shared device between reboots. It must be removed and recreated after rebooting the nodes
+* Basic scripts need to be created to run the logic of monitoring node health and reacting appropriately
+** The NATS/Jetstream team came up with an interesting idea of gathering external and internal data points and then running them 
+   through a logic engine to determine how impaired the cluster is and limiting service appropriately
+** Not sure how this would work with etcd, since it's just the data store, not the decision maker
