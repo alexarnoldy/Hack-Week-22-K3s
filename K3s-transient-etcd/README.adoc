@@ -30,3 +30,4 @@
 ** The NATS/Jetstream team came up with an interesting idea of gathering external and internal data points and then running them 
    through a logic engine to determine how impaired the cluster is and limiting service appropriately
 ** Not sure how this would work with etcd, since it's just the data store, not the decision maker
+* Still needs TLS integrated into etcd
