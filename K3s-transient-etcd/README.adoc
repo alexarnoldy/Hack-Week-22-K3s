@@ -16,9 +16,15 @@
 ** Ran the container on the other node
 * The etcd cluster remains responsive throughout the exercise
 
+.On 02/07/23 installed K3s with KINE
+
+* Will update the instructions in gist but it works exactly as advertised.
+* Right now the only two missing pieces are to get DRBD to behave itself and create the scripts to manage fencing and running the transient instance on the appropriate node
+
 .Issues uncovered / tasks left outstanding
 
-* A full load balancer is needed since Keepalived is providing an extra IP address on the node, not on the containers
+* I thought Keepalived + a load balancer would be needed, but then discovered that the KINE interface for etcd points to all etcd instances, so it is not
+** I am removing the Keepalived portion of the directions.
 * DRBD doesn't maintain the shared device between reboots. It must be removed and recreated after rebooting the nodes
 * Basic scripts need to be created to run the logic of monitoring node health and reacting appropriately
 ** The NATS/Jetstream team came up with an interesting idea of gathering external and internal data points and then running them 
