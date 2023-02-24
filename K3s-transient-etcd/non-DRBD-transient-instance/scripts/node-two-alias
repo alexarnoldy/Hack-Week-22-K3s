@@ -1,1 +1,1 @@
-alias push-transient-data="podman stop etcd-transient; scp -r /opt/etcd-transient/ 10.11:/opt/; podman start etcd-transient"
+alias push-transient-data="ssh 10.11 rm -rf /opt/etcd-transient; podman stop etcd-transient; scp -r /opt/etcd-transient/ 10.11:/opt/; podman start etcd-transient"
