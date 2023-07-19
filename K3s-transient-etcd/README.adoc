@@ -31,3 +31,8 @@
    through a logic engine to determine how impaired the cluster is and limiting service appropriately
 ** Not sure how this would work with etcd, since it's just the data store, not the decision maker
 * Still needs TLS integrated into etcd
+
+.Around 04/2023 tested eliminating DRBD
+
+* Unfortunately, I can't seem to find the notes, but I did get it to work by scp'ing over a copy of the `etcd` directory to the sibling node after a node has taken over.
+* Uses the same logic as described in the `etcd-for-two-node-HA-K3s-cluster.pdf` document.
